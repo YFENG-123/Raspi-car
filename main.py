@@ -20,53 +20,67 @@ pygame.event.set_grab(True)  # 锁定鼠标
 
 # 定义GPIO
 frequency = 50
-horizon_location = 1.5 
-vertical_location = 1.5 
-P14 = PWMOutputDevice(14,active_high=True,initial_value = vertical_location * 5 /100,frequency=frequency)
-P15 = PWMOutputDevice(15,active_high=True,initial_value = horizon_location* 5 / 100,frequency=frequency)
+horizon_location = 7.5 
+vertical_location = 7.5 
+P14 = PWMOutputDevice(14,initial_value = vertical_location  /100,frequency=frequency)
+P15 = PWMOutputDevice(15,initial_value = horizon_location / 100,frequency=frequency)
 
 # 定义摄像头
 video = cv2.VideoCapture(0) # 打开摄像头
 
 # 定时器
-pygame.time.set_timer( pygame.USEREVENT, 1000)
+pygame.time.set_timer( pygame.USEREVENT, 500)
 
 while True:
 
     # 事件循环
     for event in pygame.event.get():  # 列表方式
-        if event.type == QUIT:  # 窗口关闭方式
+        if event.type == pygame.QUIT:  # 窗口关闭方式
             pygame.quit()
             break
-        elif event.type == MOUSEMOTION:  # 鼠标移动方式
-            print(event)
-        elif event.type == KEYDOWN:  # 列表按键方式
-            if event.mod & KMOD_LSHIFT:  # 列表取修饰键方式
-                if event.key == K_ESCAPE:  # 列表取键盘方式
+        elif event.type == pygame.MOUSEMOTION:  # 鼠标移动方式
+            #print(event)
+            pass
+        elif event.type == pygame.KEYDOWN:  # 列表按键方式
+            if event.mod & pygame.KMOD_LSHIFT:  # 列表取修饰键方式
+                if event.key == pygame.K_ESCAPE:  # 列表取键盘方式
                     pygame.quit()
+
+            '''if event.key == pygame.K_w:
+                vertical_location -= 0.1
+                print("vertical_location:" + str(vertical_location))
+            if event.key == pygame.K_s:
+                vertical_location += 0.1
+                print("vertical_location:" + str(vertical_location))
+            if event.key == pygame.K_a:
+                horizon_location += 0.1
+                print("horizon_location:" + str(horizon_location))
+            if event.key == pygame.K_d:
+                horizon_location -= 0.1
+                print("horizon_location:" + str(horizon_location))'''
+
         elif event.type == pygame.USEREVENT:
-            P14.value = vertical_location* 5 /100
-            P15.value = horizon_location* 5 /100
-            print("horizon_location:" + str(horizon_location))
-            print("vertical_location:" + str(vertical_location))
+            P14.value = vertical_location /100
+            P15.value = horizon_location /100
+            #print("horizon_location:" + str(horizon_location))
+            #print("vertical_location:" + str(vertical_location))
+
+    clock.tick(60)  # 60 FPS
 
     # 键盘控制移动方式
     keys = pygame.key.get_pressed()  # 轮询取按键方式
     if keys[pygame.K_w]:
-        vertical_location -= 0.01
+        vertical_location -= 0.1
         print("vertical_location:" + str(vertical_location))
     if keys[pygame.K_s]:
-        vertical_location += 0.01
+        vertical_location += 0.1
         print("vertical_location:" + str(vertical_location))
     if keys[pygame.K_a]:
-        horizon_location += 0.01
+        horizon_location += 0.1
         print("horizon_location:" + str(horizon_location))
     if keys[pygame.K_d]:
-        horizon_location -= 0.01
+        horizon_location -= 0.1
         print("horizon_location:" + str(horizon_location))
-
-
-    clock.tick(60)  # 60 FPS
 
     ret, frame = video.read() # 读取一帧
     cv2.imshow("Video Stream", frame) # 显示一帧
