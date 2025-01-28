@@ -67,7 +67,7 @@ class APP:
             手柄读取
             '''
             if event.type == pygame.JOYAXISMOTION:
-                self.joystick = self.Joysticks[event.instance_id]
+                #self.joystick = self.Joysticks[event.instance_id]
                 print(str(self.joystick.get_id())+ str(self.joystick.get_joystick_data()))
 
 

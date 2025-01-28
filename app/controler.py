@@ -1,5 +1,6 @@
 import pygame
 import time
+from uart import Serial
 
 
 class Controler:
@@ -43,25 +44,25 @@ class Controler:
         print("测试完成")
 
     def get_id(self):
-        return (self.Joystick.get_instance_id())
+        return self.Joystick.get_instance_id()
 
     def get_left_x(self):
-        return (self.Joystick.get_axis(0))
+        return round(self.Joystick.get_axis(0), 2)
 
     def get_left_y(self):
-        return (self.Joystick.get_axis(1))
+        return round(self.Joystick.get_axis(0), 2)
 
     def get_left_z(self):
-        return (self.Joystick.get_axis(2))
+        return round(self.Joystick.get_axis(0), 2)
 
     def get_right_x(self):
-        return (self.Joystick.get_axis(3))
+        return round(self.Joystick.get_axis(0), 2)
 
     def get_right_y(self):
-        return self.Joystick.get_axis(4)
+        return round(self.Joystick.get_axis(0), 2)
 
     def get_right_z(self):
-        return self.Joystick.get_axis(5)
+        return round(self.Joystick.get_axis(0), 2)
 
     def get_joystick_data(self):
         return [self.Joystick.get_axis(i) for i in range(6)]
@@ -71,7 +72,9 @@ if __name__ == "__main__":
     pygame.init()
     controler = Controler(0)
     print(controler.get_joystick_data())
+    uart1 = Serial()
     while True:
+        
         event = pygame.event.get()
         for e in event:
             if e.type == pygame.QUIT:
@@ -79,6 +82,7 @@ if __name__ == "__main__":
                 exit()
                 break
             if e.type == pygame.JOYAXISMOTION:
-                print(controler.get_joystick_data())
-            if e.type == pygame.JOYBUTTONDOWN:
-                print(controler.get_joystick_data())
+                data = controler.get_joystick_data()
+                data_format = f"{data[0]:+.2f};{data[1]:+.2f};{data[2]:+.2f};{data[3]:+.2f};{data[4]:+.2f};{data[5]:+.2f}\n"
+                print(data_format)
+                uart1.send(data_format)
