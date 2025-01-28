@@ -1,3 +1,4 @@
+
 import machine
 import json
 
@@ -54,3 +55,4 @@ while True:
         continue
     else:
         buffer += str(b)[2]
+
