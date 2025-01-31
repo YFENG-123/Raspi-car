@@ -34,7 +34,7 @@ while True:
         print(Left_spd_X, Left_spd_Y)
         buffer = ""
 
-        Left_duty_X = Left_duty_X + Left_spd_X * 0.15
+        Left_duty_X = Left_duty_X - Left_spd_X * 0.15
         Left_duty_Y = Left_duty_Y + Left_spd_Y * 0.15
 
         if Left_duty_X > 12.5:
