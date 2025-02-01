@@ -2,7 +2,7 @@ import cv2
 from ultralytics import YOLO
 
 camera = cv2.VideoCapture(0)
-model = YOLO("yolov8n_100e.pt")
+model = YOLO("yolo11n.pt")
 
 while True:
     # 读取一帧图像

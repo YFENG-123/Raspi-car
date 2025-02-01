@@ -1,9 +1,9 @@
 """
 引入库文件
 """
-from gui import PygameGUI
-from holder_device import Holder
-from controler import Controler
+from app.app_gui import PygameGUI
+from app.app_holder_device import Holder
+from app.app_controler import Controler
 
 # 引入 pygame 相关库
 import pygame

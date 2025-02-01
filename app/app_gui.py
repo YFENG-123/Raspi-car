@@ -1,5 +1,5 @@
 import pygame
-from camera_device import PygameCamera
+from app.app_camera_device import PygameCamera
 
 class PygameGUI:
     def __init__(self):

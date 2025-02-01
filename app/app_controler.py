@@ -1,6 +1,6 @@
 import pygame
 import time
-from uart import Serial
+from app.app_uart import Serial
 
 
 class Controler:
