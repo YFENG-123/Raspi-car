@@ -1,4 +1,4 @@
-# Respi-car
+# Raspi-car
 - 测试环境：Windows 11
 
 - 运行环境：树莓派5（8GB RAM） arm64 aarch64 PIOS 64位
