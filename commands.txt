@@ -4,8 +4,6 @@ conda activate venv
 
 -i https://pypi.tuna.tsinghua.edu.cn/simple
 
-pip install pillow opencv-python gpiozero rpi.gpio pigpio lgpio ultralytics -i https://pypi.tuna.tsinghua.edu.cn/simple
-
 pip freeze > requirements.txt
 
 pip install -r requirements.txt

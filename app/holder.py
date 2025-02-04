@@ -4,8 +4,8 @@ import pygame
 import time
 import serial
 import serial.tools.list_ports
-from app_controler import Controler
-from app_uart import Uart
+from controler import Controler
+from uart import Uart
 
 # gpiozero.Device.pin_factory = gpiozero.pins.lgpio.LGPIOFactory()
 
