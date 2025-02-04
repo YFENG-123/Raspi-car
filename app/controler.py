@@ -59,32 +59,11 @@ class Controler:
     def get_id(self):
         return self.Joystick.get_instance_id()
 
-    def get_left_x(self):
-        return round(self.Joystick.get_axis(0), 2)
-
-    def get_left_y(self):
-        return round(self.Joystick.get_axis(1), 2)
-
-    def get_right_x(self):
-        return round(self.Joystick.get_axis(2), 2)
-
-    def get_right_y(self):
-        return round(self.Joystick.get_axis(3), 2)
-
-    def get_right_z(self):
-        return round(self.Joystick.get_axis(4), 2)
-
-    def get_left_z(self):
-        return round(self.Joystick.get_axis(5), 2)
-
     def get_joystick_data(self):
         return [self.Joystick.get_axis(i) for i in range(6)]
 
-    def get_joystick_data_str(self):
-        data = self.get_joystick_data()
-        data_format = ";".join([f"{data[i]:+.2f}" for i in range(6)])
-        print(data_format)
-        return data_format
+    def get_hat_data(self):
+        return self.Joystick.get_hat(0)
 
 
 if __name__ == "__main__":
