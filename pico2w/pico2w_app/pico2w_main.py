@@ -1,17 +1,17 @@
 import machine
 import time
-from pico_uart import Uart
-from pico_holder import Holder
+from pico2w_uart import Uart
+from pico2w_holder import Holder
 
 class APP:
     def __init__(self):
         self.holder = Holder() # 初始化云台
         self.uart = Uart() # 初始化UART
-        self.uart.irq(self._uartInterrupted) # 监听UART
+        self.uart.irq(self._uart_interrupted) # 监听UART
         #self.last_time = time.time_ns() # 记录时间
         #self.time = 0 # 记录时间
 
-    def _uartInterrupted(self,uart_info):
+    def _uart_interrupted(self,uart_info):
         '''
         # 计算两次中断时间差
         self.time = time.time_ns()

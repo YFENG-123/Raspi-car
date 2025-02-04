@@ -1,10 +1,7 @@
-"""
-引入库文件
-"""
-
-from app_gui import PygameGUI
-from app_holder_device import Holder
-from app_controler import Controler
+# 引入 app 相关库文件
+from gui import PygameGUI
+from holder import Holder
+from controler import Controler
 
 # 引入 pygame 相关库
 import pygame
@@ -14,7 +11,7 @@ from pygame.locals import *  # noqa: F403
 # 引入其他库文件
 import time
 from threading import Timer
-from app_uart import Uart
+from uart import Uart
 
 
 class APP:

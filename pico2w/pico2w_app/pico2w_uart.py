@@ -10,7 +10,7 @@ class Uart(machine.UART):
             0,
             tx=pin0,
             rx=pin1,
-            baudrate=4000000,
+            baudrate=3000000,
             # parity=0,
             # stop=2,
             bits=8,
