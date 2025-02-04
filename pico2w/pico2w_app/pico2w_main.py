@@ -3,6 +3,7 @@ import time
 from pico2w_uart import Uart
 from pico2w_holder import Holder
 
+
 class APP:
     def __init__(self):
         self.holder = Holder() # 初始化云台
@@ -21,12 +22,19 @@ class APP:
         '''
 
         #print("uart_info", uart_info)
-        data = self.uart.readline()
+        massage = self.uart.readline()
         #print("data:", data)
-        data_format = str(data)[2:-1]
+        massage_decode = str(massage)[2:-1]
         #print("data_format:",data_format)
-        self.holder.readMove(data_format)
-        self.holder.update()
+        massage_unpack = massage_decode.split(";")
+        print("massage_unpack:",massage_unpack)
+        controler = massage_unpack[1]
+        device = massage_unpack[0]
+        data = massage_unpack[2:-1]
+        print("data:",data)
+        if device == "1":
+            self.holder.readMove(controler,data)
+            self.holder.update()
 
     def run(self):
         while True:

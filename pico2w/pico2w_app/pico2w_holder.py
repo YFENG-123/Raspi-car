@@ -17,17 +17,17 @@ class Holder:
         self.left_X_move = 0  # 初始化左侧摇杆X轴移动量
         self.left_Y_move = 0  # 初始化左侧摇杆Y轴移动量
 
-    def readMove(self, buffer):
+    def readMove(self,controler, buffer):
         # print("buffer",buffer)
         buffer_format = buffer.split(";")
         # print("buffer_format",buffer_format)
         try:
             print("buffer_format[0]",buffer_format[0])
             print("buffer_format[1]",buffer_format[1])
-            if buffer_format[0] == "1":
+            if controler == "1":
                 self.left_X_move = float(buffer_format[1])  # 读取左侧摇杆X轴移动量
                 self.left_Y_move = float(buffer_format[2])  # 读取左侧摇杆Y轴移动量
-            elif buffer_format[0] == "2":
+            elif controler == "2":
                 if buffer_format[1] == "w":
                     self.left_Y_move = 1
                 elif buffer_format[1] == "s":

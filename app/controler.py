@@ -1,6 +1,20 @@
 import pygame
 import time
 
+class Xbox:
+    def __init__(self):
+        self.BUTTON_A = 0
+        self.BUTTON_B = 1
+        self.BUTTON_X = 3
+        self.BUTTON_Y = 4
+        self.BUTTON_LB = 6
+        self.BUTTON_RB = 7
+        self.BUTTON_L = 13
+        self.BUTTON_R = 14
+        self.BUTTON_MAP = 10
+        self.BUTTON_MANUAL = 11
+        self.BUTTON_SHARE = 15
+
 
 class Controler:
     def __init__(self, device_index):
@@ -49,26 +63,27 @@ class Controler:
         return round(self.Joystick.get_axis(0), 2)
 
     def get_left_y(self):
-        return round(self.Joystick.get_axis(0), 2)
-
-    def get_left_z(self):
-        return round(self.Joystick.get_axis(0), 2)
+        return round(self.Joystick.get_axis(1), 2)
 
     def get_right_x(self):
-        return round(self.Joystick.get_axis(0), 2)
+        return round(self.Joystick.get_axis(2), 2)
 
     def get_right_y(self):
-        return round(self.Joystick.get_axis(0), 2)
+        return round(self.Joystick.get_axis(3), 2)
 
     def get_right_z(self):
-        return round(self.Joystick.get_axis(0), 2)
+        return round(self.Joystick.get_axis(4), 2)
+
+    def get_left_z(self):
+        return round(self.Joystick.get_axis(5), 2)
 
     def get_joystick_data(self):
         return [self.Joystick.get_axis(i) for i in range(6)]
 
     def get_joystick_data_str(self):
         data = self.get_joystick_data()
-        data_format = f"{data[0]:+.2f};{data[1]:+.2f};{data[2]:+.2f};{data[3]:+.2f};{data[4]:+.2f};{data[5]:+.2f}"
+        data_format = ";".join([f"{data[i]:+.2f}" for i in range(6)])
+        print(data_format)
         return data_format
 
 
