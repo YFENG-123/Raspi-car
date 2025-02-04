@@ -15,7 +15,7 @@ class Uart:
 
         self.uart = serial.Serial(
             "/dev/ttyAMA0",
-            4000000,
+            3000000,
             parity=serial.PARITY_EVEN,
             stopbits=serial.STOPBITS_TWO,
             bytesize=serial.EIGHTBITS,
