@@ -4,7 +4,7 @@ class Joystick_data:
         self.hat: list = [0, 0]
         self.buttons: list = []
 
-    def set_data(self, joystick_data):
+    def load_data(self, joystick_data):
         self.load_position_data(position_data=joystick_data.get("position"))
         self.load_hat_data(hat_data=joystick_data.get("hat"))
         self.load_buttons_data(buttons_data=joystick_data.get("buttons"))
@@ -37,7 +37,7 @@ class Mouse_data:
         self.buttons: list = []
         self.whell: int = 0
 
-    def set_data(self, mouse_data):
+    def load_data(self, mouse_data):
         self.load_relative_data(relative_data=mouse_data.get("relative"))
         self.load_whell_data(whell_data=mouse_data.get("whell"))
         self.load_buttons_data(buttons_data=mouse_data.get("buttons"))
@@ -68,7 +68,7 @@ class Keyboard_data:
     def __init__(self):
         self.keys: list = []
 
-    def set_data(self, keyboard_data: dict):
+    def load_data(self, keyboard_data: dict):
         self.load_keys_data(keys_data=keyboard_data.get("keys"))
 
     def load_keys_data(self, keys_data):
@@ -78,36 +78,55 @@ class Keyboard_data:
             self.keys = []
             raise Exception("keys data error")
 
-class Yolo_data:
-    def __init__(self):
-        pass
 
+class Virtual_controler_data:
+    def __init__(self):
+        self.holder_control = [0, 0]
+
+    def load_data(self, virtual_controler_data: dict):
+        self.load_holder_control_data(
+            holder_control=virtual_controler_data.get("holder_control")
+        )
+
+    def load_holder_control_data(self, holder_control):
+        if isinstance(holder_control, list) and len(holder_control) == 2:
+            self.holder_control = holder_control
+        else:
+            self.holder_control = [0, 0]
+            raise Exception("holder_control data error")
 
 class Json_data:
     def __init__(self):
         self.mouse_data: Mouse_data = Mouse_data()
         self.joystick_data: Joystick_data | None = Joystick_data()
         self.keyboard_data: Keyboard_data = Keyboard_data()
+        self.virtual_controler_data: Virtual_controler_data = Virtual_controler_data()
 
-    def set_data(self, json_data: dict):
-        self.load_joystick_data(joystick_data=json_data.get("joystick"))
-        self.load_mouse_data(mouse_data=json_data.get("mouse"))
-        self.load_keyboard_data(keyboard_data=json_data.get("keyboard"))
+    def load_data(self, json_data: dict):
+        self.load_joystick_data(json_data.get("joystick"))
+        self.load_mouse_data(json_data.get("mouse"))
+        self.load_keyboard_data(json_data.get("keyboard"))
+        self.load_virtual_controler_data(json_data.get("virtual_controler"))
 
     def load_joystick_data(self, joystick_data):
         if isinstance(joystick_data, dict):
-            self.joystick_data.set_data(joystick_data=joystick_data)
+            self.joystick_data.load_data(joystick_data)
         else:
             raise Exception("joystick data error")
 
     def load_mouse_data(self, mouse_data: dict):
         if isinstance(mouse_data, dict):
-            self.mouse_data.set_data(mouse_data=mouse_data)
+            self.mouse_data.load_data(mouse_data)
         else:
             raise Exception("mouse data error")
 
     def load_keyboard_data(self, keyboard_data: dict):
         if isinstance(keyboard_data, dict):
-            self.keyboard_data.set_data(keyboard_data=keyboard_data)
+            self.keyboard_data.load_data(keyboard_data)
         else:
             raise Exception("keyboard data error")
+    def load_virtual_controler_data(self, virtual_controler_data: dict):
+        if isinstance(virtual_controler_data, dict):
+            self.virtual_controler_data.load_data(virtual_controler_data)
+        else:
+            raise Exception("virtual_controler data error")

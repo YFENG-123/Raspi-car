@@ -15,7 +15,7 @@ class Joystick:
 
     def eliminate_dead_zone(self):
         for i in range(4):
-            if abs(self.position[i]) < 0.05:
+            if abs(self.position[i]) < 0.075:
                 self.position[i] = 0
 
     def get_left_axis(self):

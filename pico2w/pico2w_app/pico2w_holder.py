@@ -4,6 +4,7 @@ import time
 from pico2w_mouse import Mouse
 from pico2w_joystick import Joystick
 from pico2w_keyboard import Keyboard
+from pico2w_virtual_controler import Virtual_controler
 
 
 class Holder:
@@ -21,14 +22,28 @@ class Holder:
         self.horizon_move = 0  # 初始化水平移动
         self.vertical_move = 0  # 初始化垂直移动
 
-    def read_move(self, joystick: Joystick, mouse: Mouse, keyboard: Keyboard):
+    def read_move(
+        self,
+        joystick: Joystick,
+        mouse: Mouse,
+        keyboard: Keyboard,
+        virtual_controler: Virtual_controler,
+    ):
+        virtual_holder_control = virtual_controler.get_holder_control()
+        self.horizon_move = virtual_holder_control[0]* 0.3
+        self.vertical_move = virtual_holder_control[1]* 0.3
+
         left_axis = joystick.get_left_axis()
-        self.horizon_move = left_axis[0]
-        self.vertical_move = left_axis[1]
+        if left_axis[0] != 0 or left_axis[1] != 0:
+            self.horizon_move = -left_axis[0] * 0.35
+            self.vertical_move = left_axis[1] * 0.35
+        print(left_axis[0], left_axis[1])
+        print(virtual_holder_control[0], virtual_holder_control[1])
+        print(self.horizon_move, self.vertical_move)
 
     def update_horizon(self):
         self.horizon_duty = (  # 更新水平占空比（位置）
-            self.horizon_duty - self.horizon_move * 0.35
+            self.horizon_duty + self.horizon_move
         )
 
         """限制水平占空比（位置）"""
@@ -43,7 +58,7 @@ class Holder:
 
     def update_vertical(self):
         self.vertical_duty = (  # 更新垂直占空比（位置）
-            self.vertical_duty + self.vertical_move * 0.35
+            self.vertical_duty + self.vertical_move
         )
         """限制垂直占空比（位置）"""
         if self.vertical_duty > 12.5:
