@@ -25,7 +25,6 @@ class Holder:
         left_axis = joystick.get_left_axis()
         self.horizon_move = left_axis[0]
         self.vertical_move = left_axis[1]
-        print(self.horizon_move, self.vertical_move)
 
     def update_horizon(self):
         self.horizon_duty = (  # 更新水平占空比（位置）

@@ -7,7 +7,7 @@ from pico2w_keyboard import Keyboard
 from pico2w_mouse import Mouse
 
 
-from schema import Json_data
+from pico2w.pico2w_app.pico2w_schema import Json_data
 
 
 """引入系统模块"""
@@ -71,9 +71,12 @@ class APP:
     def _uart_interrupted(self, uart_info):
         massage = self.uart.readline()  # 读取串口数据
         json_buffer = json.loads(massage)  # 字节流转为json
-        print(json_buffer)
+        # print(json_buffer)
         try:
-            self.json_data.load_data(json_buffer)  # json 数据转对象
+            self.json_data.set_data(json_buffer)  # json 数据转对象
+            self.joystick.set_data(self.json_data.joystick_data)
+            self.keyboard.set_data(self.json_data.keyboard_data)
+            self.mouse.set_data(self.json_data.mouse_data)
             self.data_ready = True
         except Exception as e:
             print(e)
