@@ -1,5 +1,6 @@
 import schema
 
+
 class Mouse:
     def __init__(self):
         self.relative = [0, 0]
