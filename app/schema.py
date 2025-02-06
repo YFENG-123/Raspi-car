@@ -17,10 +17,15 @@ class Keyboard(BaseModel):
     keys: list = []
 
 
+class Virtual_controler(BaseModel):
+    holder_control: list = [0, 0]
+
+
 class Json_buffer(BaseModel):
     mouse: Mouse = Mouse()
     joystick: Joystick | None = Joystick()
     keyboard: Keyboard = Keyboard()
+    virtual_controler: Virtual_controler = Virtual_controler()
 
 
 if __name__ == "__main__":

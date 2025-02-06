@@ -61,7 +61,7 @@ class Controler:
         return self.Joystick.get_instance_id()
 
     def get_joystick_data(self):
-        return [self.Joystick.get_axis(i) for i in range(6)]
+        return [round(self.Joystick.get_axis(i),2) for i in range(6)]
 
     def get_hat_data(self):
         return self.Joystick.get_hat(0)

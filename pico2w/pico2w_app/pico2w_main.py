@@ -1,13 +1,17 @@
-"""引入自定义模块"""
-
+"""引入通信模块"""
 from pico2w_uart import Uart
+from pico2w_schema import Json_data
+'''引入云台模块'''
 from pico2w_holder import Holder
+
+'''引入控制模块'''
 from pico2w_joystick import Joystick
 from pico2w_keyboard import Keyboard
 from pico2w_mouse import Mouse
+from pico2w_virtual_controler import Virtual_controler
 
 
-from pico2w.pico2w_app.pico2w_schema import Json_data
+
 
 
 """引入系统模块"""
@@ -62,7 +66,9 @@ class APP:
         self.mouse = Mouse()  # 初始化鼠标
         self.joystick = Joystick()  # 初始化手柄
         self.keyboard = Keyboard()  # 初始化键盘
+        self.virtual_controler = Virtual_controler()
         self.json_data = Json_data()
+        
         """初始化数据接口"""
         self.uart = Uart()  # 初始化UART
         self.uart.irq(self._uart_interrupted)  # 监听UART
@@ -71,12 +77,13 @@ class APP:
     def _uart_interrupted(self, uart_info):
         massage = self.uart.readline()  # 读取串口数据
         json_buffer = json.loads(massage)  # 字节流转为json
-        # print(json_buffer)
+        print(json_buffer)
         try:
-            self.json_data.set_data(json_buffer)  # json 数据转对象
+            self.json_data.load_data(json_buffer)  # json 数据转对象
             self.joystick.set_data(self.json_data.joystick_data)
             self.keyboard.set_data(self.json_data.keyboard_data)
             self.mouse.set_data(self.json_data.mouse_data)
+            self.virtual_controler.set_data(self.json_data.virtual_controler_data)
             self.data_ready = True
         except Exception as e:
             print(e)
@@ -85,7 +92,7 @@ class APP:
         while True:
             if self.data_ready:
                 self.data_ready = False
-                self.holder.read_move(self.joystick, self.mouse, self.keyboard)
+                self.holder.read_move(self.joystick, self.mouse, self.keyboard,self.virtual_controler)
                 self.holder.update()
             else:
                 time.sleep(0.01)
