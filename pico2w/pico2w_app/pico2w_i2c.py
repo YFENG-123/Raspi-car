@@ -93,7 +93,7 @@ class I2c(machine.I2C):
         # print("speed1[0] = {0}".format(speed1[0]))
         time.sleep(0.5)
         print(b"50")
-        self.writeto_mem(self.main_addr, self.motor_fixed_speed_addr,b"50")
+        self.writeto_mem(self.main_addr, self.motor_fixed_speed_addr, b"50")
 
 
 if __name__ == "__main__":
@@ -103,18 +103,16 @@ if __name__ == "__main__":
     i2c.read_battery()
 
     time.sleep(1)
-    #i2c.set_speed(1)
+    # i2c.set_speed(1)
 
     time.sleep(1)
     i2c._reset()
 
-    '''
+    """
     while True:
         i2c.set_speed(100)
         time.sleep(1)
-    '''
-
-    
+    """
 
     """
     for i in range(0, 1000):
@@ -123,11 +121,11 @@ if __name__ == "__main__":
         time.sleep(0.5)
     """
 
-'''
+"""
 while True:
     i2c.read_encoder()
     i2c.set_speed(50)
     time.sleep(1)
     i2c.set_speed(-50)
     time.sleep(1)
-'''
+"""

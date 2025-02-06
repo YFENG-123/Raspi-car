@@ -1,6 +1,7 @@
 import pygame
 import time
 
+
 class Xbox:
     def __init__(self):
         self.BUTTON_A = 0
