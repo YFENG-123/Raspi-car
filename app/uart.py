@@ -1,6 +1,7 @@
 import serial
 import serial.tools.list_ports
 import time
+import json
 
 
 class Uart:
@@ -40,11 +41,21 @@ if __name__ == "__main__":
     y2 = 1
     y3 = 1
     print(f"1{x1:2}1")
-    #uart.send("{x1:1} \r\n")
+    # uart.send("{x1:1} \r\n")
     time.sleep(0.1)
-    uart.send(" 1.00; 1.00; 1.00; 1.00; 1.00; 1.00")
+    # uart.send(" 1.00; 1.00; 1.00; 1.00; 1.00; 1.00")
     time.sleep(0.1)
-    uart.send(" 1.00; 1.00; 1.00; 1.00; 1.00; 1.00")
+    # uart.send(" 1.00; 1.00; 1.00; 1.00; 1.00; 1.00")
     time.sleep(0.1)
-    uart.send(" 1.00; 1.00; 1.00; 1.00; 1.00; 1.00")
-
+    uart.send(
+        json.dumps(
+            {
+                "joystick": {"position": [0, 0, 0, 0, 1, 1]},
+                "x2": 1,
+                "x3": 1,
+                "y1": 1,
+                "y2": 1,
+                "y3": 1,
+            }
+        )
+    )
