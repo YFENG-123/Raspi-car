@@ -1,17 +1,16 @@
 """引入通信模块"""
+
 from pico2w_uart import Uart
 from pico2w_schema import Json_data
-'''引入云台模块'''
+
+"""引入云台模块"""
 from pico2w_holder import Holder
 
-'''引入控制模块'''
+"""引入控制模块"""
 from pico2w_joystick import Joystick
 from pico2w_keyboard import Keyboard
 from pico2w_mouse import Mouse
 from pico2w_virtual_controler import Virtual_controler
-
-
-
 
 
 """引入系统模块"""
@@ -68,7 +67,7 @@ class APP:
         self.keyboard = Keyboard()  # 初始化键盘
         self.virtual_controler = Virtual_controler()
         self.json_data = Json_data()
-        
+
         """初始化数据接口"""
         self.uart = Uart()  # 初始化UART
         self.uart.irq(self._uart_interrupted)  # 监听UART
@@ -92,7 +91,9 @@ class APP:
         while True:
             if self.data_ready:
                 self.data_ready = False
-                self.holder.read_move(self.joystick, self.mouse, self.keyboard,self.virtual_controler)
+                self.holder.read_move(
+                    self.joystick, self.mouse, self.keyboard, self.virtual_controler
+                )
                 self.holder.update()
             else:
                 time.sleep(0.01)

@@ -30,8 +30,8 @@ class Holder:
         virtual_controler: Virtual_controler,
     ):
         virtual_holder_control = virtual_controler.get_holder_control()
-        self.horizon_move = virtual_holder_control[0]* 0.3
-        self.vertical_move = virtual_holder_control[1]* 0.3
+        self.horizon_move = virtual_holder_control[0] * 0.3
+        self.vertical_move = virtual_holder_control[1] * 0.3
 
         left_axis = joystick.get_left_axis()
         if left_axis[0] != 0 or left_axis[1] != 0:

@@ -7,7 +7,7 @@ class Joystick:
         self.hat = [0, 0]
         self.button = []
 
-    def set_data(self, data:schema.Joystick_data):
+    def set_data(self, data: schema.Joystick_data):
         self.position = data.position
         self.hat = data.hat
         self.button = data.buttons

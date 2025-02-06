@@ -71,7 +71,6 @@ def main():
         player_pos.x += speedX * 10
         player_pos.y += speedY * 10
 
-        
         # 刷新背景
         screen.fill("black")
 

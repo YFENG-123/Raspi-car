@@ -95,6 +95,7 @@ class Virtual_controler_data:
             self.holder_control = [0, 0]
             raise Exception("holder_control data error")
 
+
 class Json_data:
     def __init__(self):
         self.mouse_data: Mouse_data = Mouse_data()
@@ -125,6 +126,7 @@ class Json_data:
             self.keyboard_data.load_data(keyboard_data)
         else:
             raise Exception("keyboard data error")
+
     def load_virtual_controler_data(self, virtual_controler_data: dict):
         if isinstance(virtual_controler_data, dict):
             self.virtual_controler_data.load_data(virtual_controler_data)

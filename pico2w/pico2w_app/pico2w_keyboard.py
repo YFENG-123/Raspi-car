@@ -1,5 +1,6 @@
 import schema
 
+
 class Keyboard:
     def __init__(self):
         self.keys = []
