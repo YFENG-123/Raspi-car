@@ -1,13 +1,16 @@
+import schema
+
+
 class Joystick:
     def __init__(self):
         self.position = [0, 0, 0, 0, -1, -1]
         self.hat = [0, 0]
         self.button = []
 
-    def set_data(self, data):
-        self.position = data["position"]
-        self.hat = data["hat"]
-        self.button = data["buttons"]
+    def set_data(self, data:schema.Joystick_data):
+        self.position = data.position
+        self.hat = data.hat
+        self.button = data.buttons
         self.eliminate_dead_zone()
 
     def eliminate_dead_zone(self):
