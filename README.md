@@ -2,10 +2,11 @@
 - 测试环境：Windows 11
 
 - 运行环境：树莓派5（8GB RAM） arm64 aarch64 PIOS 64位
-  - 运行环境下引入pygame库需要 conda install -c conda-forge gcc 否则会报错。
+  - 运行环境下引入pygame库需要 ``conda install -c conda-forge gcc`` 否则会报错。
+  - pyaudio库需要用conda安装``conda install pyaudio``
 
 
-- pygame.camera需要安装opencv才能使用
+- pygame.camera需要安装opencv才能使用pip install opencv-python
 - 关于GPIO
   - 用gpiozero库操作GPIO默认工厂为PRI.gpio，其输出的PWM抖动非常大，舵机无法正常使用。
   - pigpio，rpi.gpio，均不可用，只能使用lgpio，使用前需要安装pip install rpi-lgpio

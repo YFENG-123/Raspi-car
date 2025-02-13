@@ -12,7 +12,9 @@ from controler import Controler
 from uart import Uart
 import schema as schema
 from camera import PygameCamera
+from audio import Audio
 from ultralytics import YOLO
+
 
 JOYBUTTONREPEAT = pygame.event.custom_type()
 UARTTYPE = pygame.event.custom_type()
@@ -24,6 +26,7 @@ class APP:
         self.uart = Uart()  # 创建串口对象
         self.gui = PygameGUI()  # 创建GUI对象
         self.camera = PygameCamera()  # 初始化摄像头
+        self.audio = Audio() # 创建音频对象
         self.joystick: Controler = None  # 声明手柄对象
         self.joysticks = {}  # 创建手柄字典
         # pygame.time.set_timer(UARTEVENT, 100)  # 配置定时器（暂未启用）
