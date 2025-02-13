@@ -1,4 +1,4 @@
-import schema
+import pico2w_schema
 
 
 class Mouse:
@@ -7,7 +7,7 @@ class Mouse:
         self.button = []
         self.whell = 0
 
-    def set_data(self, data: schema.Mouse_data):
+    def set_data(self, data: pico2w_schema.Mouse_data):
         self.relative = data.relative
         self.button = data.buttons
         self.whell = data.whell

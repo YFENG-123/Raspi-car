@@ -18,7 +18,6 @@ JOYBUTTONREPEAT = pygame.event.custom_type()
 UARTTYPE = pygame.event.custom_type()
 UARTEVENT = pygame.event.Event(UARTTYPE)
 
-
 class APP:
     def __init__(self):
         self.model = YOLO("/home/YFENG/Desktop/Raspi-car/yolov8n_100e.pt")

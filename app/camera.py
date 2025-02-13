@@ -10,7 +10,7 @@ class PygameCamera:
         print("摄像头列表:", self.camera_list)
         print("启动摄像头:", self.camera_list[0])
         self.camera = pygame.camera.Camera(
-            self.camera_list[0], (720, 640)
+            self.camera_list[0], (1280, 720)
         )  # 获取/注册摄像头
         self.camera.start()  # 启动摄像头
         print("摄像头启动成功")

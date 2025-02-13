@@ -8,7 +8,7 @@ class PygameGUI:
         self.mouse_grab = True  # 鼠标是否锁定
         pygame.mouse.set_visible(self.mouse_visible)  # 隐藏鼠标
         pygame.event.set_grab(self.mouse_grab)  # 锁定鼠标
-        self.display = pygame.display.set_mode((640, 480))  # 设置窗口
+        self.display = pygame.display.set_mode((1280, 720))  # 设置窗口
 
     def update(self, frame):
         self.display.blit(frame, (0, 0))  # 显示摄像头图像
