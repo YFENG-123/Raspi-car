@@ -4,7 +4,7 @@
 - 运行环境：树莓派5（8GB RAM） arm64 aarch64 PIOS 64位
   - 运行环境下引入pygame库需要 ``conda install -c conda-forge gcc`` 否则会报错。
   - pyaudio库需要用conda安装``conda install pyaudio``
-
+  - conda安装后使用/Home YFENG/anaconda3/bin/conda init初始化，然后conda config --set auto_activate_base false关闭自动启动
 
 - pygame.camera需要安装opencv才能使用pip install opencv-python
 - 关于GPIO
