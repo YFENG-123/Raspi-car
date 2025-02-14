@@ -15,7 +15,7 @@ class Uart:
                 print(list(comport)[0], list(comport)[1])
 
         self.uart = serial.Serial(
-            "/dev/ttyAMA0",
+            "/dev/ttyAMA10",
             3000000,
             parity=serial.PARITY_EVEN,
             stopbits=serial.STOPBITS_TWO,
