@@ -1,7 +1,11 @@
-import vlc
-import os
-p = vlc.MediaPlayer("/home/YFENG/Desktop/Raspi-car/录音.mp3")
-p.play()
+import whisper
+import opencc
+
+model = whisper.load_model("tiny")
+result = model.transcribe("test.wav", language="zh")
+print(result["text"])
 
 
-os.system('arecord -D "plughw:1,0" -f dat -c 1 -r 16000 -d 5 /home/YFENG/Desktop/Raspi-car/录音.mp3')
+cc = opencc.OpenCC('t2s.json')
+result = cc.convert(result['text'])
+print(result)
