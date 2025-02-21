@@ -16,8 +16,8 @@ from controler import Controler
 from uart import Uart
 import schema as schema
 from camera import OpenCVCamera
-from audio import AudioInput, AudioOutput
-from model import Model
+#from audio import AudioInput, AudioOutput
+#from model import Model
 
 
 JOYBUTTONREPEAT = pygame.event.custom_type()
@@ -43,12 +43,12 @@ class APP:
         self.json_buffer = schema.Json_buffer()  # 创建json对象
 
         """创建带线程对象"""
-        self.model = Model()  # 创建模型对象
-        self.model.set_frame(self.camera.get_frame())
+        #self.model = Model()  # 创建模型对象
+        #self.model.set_frame(self.camera.get_frame())
         #self.model.start_predict_thread()
-        self.audio_input = AudioInput()  # 创建音频输入对象
-        self.audio_output = AudioOutput()  # 创建音频输出对象
-        self.audio_input.aim = 1
+        #self.audio_input = AudioInput()  # 创建音频输入对象
+        #self.audio_output = AudioOutput()  # 创建音频输出对象
+        #self.audio_input.aim = 1
         
 
         """声明空对象"""
