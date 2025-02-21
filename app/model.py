@@ -3,6 +3,7 @@ import threading
 import cv2
 import ultralytics.engine
 import ultralytics.engine.results
+import config
 
 MODELPATH = "yolo11n.pt"
 
@@ -10,24 +11,23 @@ MODELPATH = "yolo11n.pt"
 class Model:
     def __init__(self):
         """创建模型"""
-        self.model = ultralytics.YOLO(MODELPATH)  # 创建模型        
+        self.model = ultralytics.YOLO(MODELPATH)  # 创建模型
         """创建锁"""
         self.result_lock = threading.Lock()  # 创建结果锁
         self.frame_lock = threading.Lock()  # 创建帧锁
         """创建缓存变量"""
         self.frame: cv2.typing.MatLike = None  # 创建帧
-        self.result = self.model.predict(
-            source=None
-        )[0]  # 创建结果缓存变量
+        self.result = self.model.predict(source=None)[0]  # 创建结果缓存变量
         """创建线程"""
         self.is_predict_thread_running = True  # 创建预测线程运行标志
         self.is_track_thread_running = False  # 创建跟踪线程运行标志
-        self.predict_thread = threading.Thread(target=self.predict_thread_func) # 创建线程
-        self.predict_thread.start() # 启动线程
-
-
+        self.predict_thread = threading.Thread(
+            target=self.predict_thread_func
+        )  # 创建线程
+        #self.predict_thread.start()  # 启动线程
 
     """线程函数"""
+
     def track_thread_func(self):
         while self.is_track_thread_running:
             self.frame_lock.acquire()
@@ -40,6 +40,8 @@ class Model:
 
     def predict_thread_func(self):
         while self.is_predict_thread_running:
+            while config.tag == 1:
+                pass
             self.frame_lock.acquire()
             frame = self.frame  # 获取一帧图像
             self.frame_lock.release()
@@ -89,7 +91,7 @@ if __name__ == "__main__":
 
     while True:
         _, frame = camera.read()
-        #frame = cv2.flip(frame, -1)
+        # frame = cv2.flip(frame, -1)
         model.set_frame(frame)
         result = model.get_result()
         frame_with_box = result.plot()
