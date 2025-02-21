@@ -11,8 +11,8 @@ class Uart(machine.UART):
             tx=pin0,
             rx=pin1,
             baudrate=3000000,
-            # parity=0,
-            # stop=2,
+            parity=0,
+            stop=2,
             bits=8,
             timeout=0,
             timeout_char=0,
@@ -31,10 +31,11 @@ if __name__ == "__main__":
     uart = Uart()
 
     def interrupted(uart_info):
-        # print("uart_info", uart_info)
+        #print("uart_info", uart_info)
         data = uart.readline()
         print("data:", data)
 
     uart.irq(interrupted)
     while True:
-        pass
+        uart.write(b"hello")
+        time.sleep(1)

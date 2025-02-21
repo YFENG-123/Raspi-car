@@ -6,6 +6,9 @@ from pico2w_schema import Json_data
 """引入云台模块"""
 from pico2w_holder import Holder
 
+"""引入底盘模块"""
+from pico2w_chassis import Chassis
+
 """引入控制模块"""
 from pico2w_joystick import Joystick
 from pico2w_keyboard import Keyboard
@@ -61,14 +64,15 @@ class APP:
     def __init__(self):
         """初始化设备"""
         self.holder = Holder()  # 初始化云台
+        self.chassis = Chassis()  # 初始化底盘
         """初始化控制器"""
         self.mouse = Mouse()  # 初始化鼠标
         self.joystick = Joystick()  # 初始化手柄
         self.keyboard = Keyboard()  # 初始化键盘
-        self.virtual_controler = Virtual_controler()
-        self.json_data = Json_data()
+        self.virtual_controler = Virtual_controler()  # 初始化虚拟手柄
 
         """初始化数据接口"""
+        self.json_data = Json_data()
         self.uart = Uart()  # 初始化UART
         self.uart.irq(self._uart_interrupted)  # 监听UART
         self.data_ready = False
@@ -91,10 +95,9 @@ class APP:
         while True:
             if self.data_ready:
                 self.data_ready = False
-                self.holder.read_move(
-                    self.joystick, self.mouse, self.keyboard, self.virtual_controler
-                )
-                self.holder.update()
+                print("joystick:", self.joystick.position)
+                self.holder.move(-self.joystick.position[0], self.joystick.position[1])
+                self.chassis.set_pwm(self.joystick.position[2],- self.joystick.position[3],self.joystick.position[4] + 1,self.joystick.position[5] + 1)
             else:
                 time.sleep(0.01)
 
